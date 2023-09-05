@@ -57,16 +57,22 @@ class TaskController extends ChangeNotifier {
     preferences.setStringList('Task : ${index}', SP_Task);
     _allTask[index] = task;
     SP_Task.clear();
-    notifyListeners();
+    try {
+      notifyListeners();
+    } catch (e) {
+      print(";;;;");
+    }
     return true;
   }
 
   void deleteTask({required int index}) {
+    print("remove at:${index}");
+
     _allTask.removeAt(index);
     for (int i = 0; i < _allTask.length; i++) {
       print(_allTask[i].task);
       SP_Task = setSp_Task(task: _allTask[i]);
-      preferences.setStringList('Task : ${_task_counter}', SP_Task);
+      preferences.setStringList('Task : ${i}', SP_Task);
     }
     preferences.setInt('task_counter', --_task_counter);
     notifyListeners();

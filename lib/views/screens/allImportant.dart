@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:like_button/like_button.dart';
 import 'package:provider/provider.dart';
+import 'package:to_do_application/controller/StatusController.dart';
 
 import '../../components/EditDeleteTask.dart';
 import '../../controller/BackGroundController.dart';
@@ -120,61 +121,123 @@ class AllImportant extends StatelessWidget {
                           print(tm.important);
                           return (tm.important == "True")
                               ? Card(
-                                  child: ListTile(
-                                    onLongPress: () {
-                                      editDeleteTask(
-                                        context: context,
-                                        index: index,
-                                        tm: tm,
-                                      );
-                                    },
-                                    leading: Container(
-                                      width: 50,
-                                      height: 50,
-                                      child: LikeButton(
-                                        size: 45,
-                                        isLiked: (tm.status == "Done"),
-                                        likeBuilder: (isLiked) {
-                                          (isLiked)
-                                              ? tm.status = "Done"
-                                              : tm.status = "NotDone";
-                                          print("Action : ${tm.status}");
-                                          pro.editTask(task: tm, index: index);
-                                          return Icon(
+                                  child: Consumer<StatusController>(
+                                      builder: (context, p, _) {
+                                    p.StatusChanged(s: tm.status);
+                                    p.ImportantChanged(i: tm.important);
+                                    return ListTile(
+                                      onLongPress: () {
+                                        editDeleteTask(
+                                          context: context,
+                                          index: index,
+                                          tm: tm,
+                                        );
+                                      },
+                                      leading: Container(
+                                        width: 50,
+                                        height: 50,
+                                        child: LikeButton(
+                                          size: 45,
+                                          onTap: (isLiked) async {
+                                            (!isLiked)
+                                                ? p.StatusChanged(s: "Done")
+                                                : p.StatusChanged(s: "NotDone");
+                                            tm.status = p.Status;
+                                            try {
+                                              pro.editTask(
+                                                  task: tm, index: index);
+                                            } catch (e) {
+                                              print(
+                                                  "ExceptionHandled Succesfully");
+                                            } finally {
+                                              print(
+                                                  "Exception finally handled");
+                                            }
+
+                                            return await !isLiked;
+                                          },
+                                          isLiked: (tm.status == "Done"),
+                                          likeBuilder: (isLiked) {
                                             (isLiked)
-                                                ? Icons.check_circle
-                                                : Icons.circle_outlined,
-                                            color:
-                                                isLiked ? color1 : Colors.grey,
-                                          );
-                                        },
+                                                ? tm.status = "Done"
+                                                : tm.status = "NotDone";
+                                            print("Action : ${tm.status}");
+                                            pro.editTask(
+                                                task: tm, index: index);
+                                            return Icon(
+                                              (isLiked)
+                                                  ? Icons.check_circle
+                                                  : Icons.circle_outlined,
+                                              color: isLiked
+                                                  ? color1
+                                                  : Colors.grey,
+                                            );
+                                          },
+                                        ),
                                       ),
-                                    ),
-                                    title: Text(tm.task),
-                                    subtitle: Text("${tm.date},${tm.time}"),
-                                    trailing: Container(
-                                      width: 50,
-                                      height: 50,
-                                      child: LikeButton(
-                                        size: 45,
-                                        isLiked: (tm.important == "True"),
-                                        likeBuilder: (isLiked) {
-                                          (isLiked)
-                                              ? tm.important = "True"
-                                              : tm.important = "False";
-                                          print("Action : ${tm.important}");
-                                          pro.editTask(task: tm, index: index);
-                                          return Icon(
+                                      title: Text(
+                                        tm.task,
+                                        style: TextStyle(
+                                            decoration: (p.Status == "Done")
+                                                ? TextDecoration.lineThrough
+                                                : null,
+                                            fontSize: 18),
+                                      ),
+                                      subtitle: Text(
+                                        "${tm.date},${tm.time}",
+                                        style: TextStyle(
+                                          decoration: (p.Status == "Done")
+                                              ? TextDecoration.lineThrough
+                                              : null,
+                                        ),
+                                      ),
+                                      trailing: Container(
+                                        width: 50,
+                                        height: 50,
+                                        child: LikeButton(
+                                          size: 45,
+                                          onTap: (isLiked) async {
+                                            (!isLiked)
+                                                ? p.ImportantChanged(i: "True")
+                                                : p.ImportantChanged(
+                                                    i: "False");
+                                            tm.important = p.Important;
+                                            try {
+                                              pro.editTask(
+                                                  task: tm, index: index);
+                                            } catch (e) {
+                                              print(
+                                                  "ExceptionHandled Succesfully");
+                                            } finally {
+                                              print(
+                                                  "Exception finally handled");
+                                            }
+
+                                            return await !isLiked;
+                                          },
+                                          isLiked: (tm.important == "True"),
+                                          likeBuilder: (isLiked) {
                                             (isLiked)
-                                                ? Icons.star
-                                                : Icons.star_border_outlined,
-                                            color:
-                                                isLiked ? color1 : Colors.grey,
-                                          );
-                                        },
+                                                ? p.ImportantChanged(i: "True")
+                                                : p.ImportantChanged(
+                                                    i: "False");
+                                            tm.important = p.Important;
+                                            print("Action : ${tm.important}");
+                                            pro.editTask(
+                                                task: tm, index: index);
+                                            return Icon(
+                                              (isLiked)
+                                                  ? Icons.star
+                                                  : Icons.star_border_outlined,
+                                              color: isLiked
+                                                  ? color1
+                                                  : Colors.grey,
+                                            );
+                                          },
+                                        ),
                                       ),
-                                    ),
-                                  ),
+                                    );
+                                  }),
                                 )
                               : SizedBox();
                         },

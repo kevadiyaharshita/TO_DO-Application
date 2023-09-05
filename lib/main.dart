@@ -6,9 +6,11 @@ import 'package:to_do_application/controller/SplashScreenController.dart';
 import 'package:to_do_application/controller/TaskController.dart';
 import 'package:to_do_application/utils/ColorUtils.dart';
 import 'package:to_do_application/utils/MyRoutes.dart';
+import 'package:to_do_application/views/screens/IosAddTaskPage.dart';
 import 'package:to_do_application/views/screens/IosHomePage.dart';
 import 'package:to_do_application/views/screens/SplashScreen.dart';
 import 'package:to_do_application/views/screens/allImportant.dart';
+import 'package:to_do_application/views/screens/allIosTaskPage.dart';
 import 'package:to_do_application/views/screens/allTaskPage.dart';
 import 'package:to_do_application/views/screens/allToDay.dart';
 import 'package:to_do_application/views/screens/androidHomePage.dart';
@@ -63,6 +65,7 @@ class MyApp extends StatelessWidget {
         ? CupertinoApp(
             debugShowCheckedModeBanner: false,
             theme: CupertinoThemeData(
+              primaryColor: color1,
               brightness: (Provider.of<ThemeController>(context).getTheme)
                   ? Brightness.dark
                   : Brightness.light,
@@ -70,6 +73,8 @@ class MyApp extends StatelessWidget {
             initialRoute: MyIOSRoutes.home,
             routes: {
               MyIOSRoutes.home: (context) => IosHomePage(),
+              MyIOSRoutes.IosAllTaskPage: (context) => AllIosTaskPage(),
+              MyIOSRoutes.addTaskPage: (context) => IosAddTaskPage(),
               MyIOSRoutes.SplashScreen: (context) => SplashScreen(),
             },
           )

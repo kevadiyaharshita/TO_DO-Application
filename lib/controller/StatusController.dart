@@ -12,7 +12,11 @@ class StatusController extends ChangeNotifier {
 
   StatusChanged({required String s}) {
     Status = s;
-    notifyListeners();
+    try {
+      notifyListeners();
+    } catch (e) {
+      print("Handeled success");
+    }
   }
 
   ImportantChanged({required String i}) {

@@ -9,5 +9,7 @@ class MyRoutes {
 
 class MyIOSRoutes {
   static String home = '/';
+  static String addTaskPage = 'AddTaskPage';
+  static String IosAllTaskPage = 'IosAllTask';
   static String SplashScreen = 'SpalshScreen';
 }

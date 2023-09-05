@@ -108,7 +108,7 @@ class HomePage extends StatelessWidget {
                 height: 15,
               ),
               Image(
-                image: AssetImage('assets/images/todo1.png'),
+                image: AssetImage('assets/images/To do list-pana.png'),
                 height: 280,
               ),
               Text(

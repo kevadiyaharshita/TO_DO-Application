@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../modals/TaskModal.dart';
+import '../utils/ColorUtils.dart';
 import '../utils/MyRoutes.dart';
 import 'DateTimeController.dart';
 import 'TaskController.dart';
@@ -140,7 +141,14 @@ void addTaskDialogbox({
             children: [
               Consumer<DateTimeController>(
                 builder: (context, p, _) {
-                  return OutlinedButton(
+                  return ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        elevation: 5,
+                        fixedSize: Size(100, 30),
+                        backgroundColor: color1,
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10))),
                     onPressed: () {
                       bool notNull = taskController.text == "" ? false : true;
                       if (notNull) {
@@ -179,11 +187,18 @@ void addTaskDialogbox({
                         }
                       }
                     },
-                    child: Text("SAVE"),
+                    child: Text("  SAVE  "),
                   );
                 },
               ),
-              TextButton(
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    elevation: 5,
+                    fixedSize: Size(100, 30),
+                    backgroundColor: color1,
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10))),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },

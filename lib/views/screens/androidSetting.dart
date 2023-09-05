@@ -11,26 +11,57 @@ class AndroidSettingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Settig"),
+        title: Text("Setting"),
       ),
       body: Center(
         child: Column(
           children: [
-            Consumer<PlatformController>(builder: (context, pro, _) {
-              return Switch(
-                value: pro.getPlatformConverter,
-                onChanged: (val) {
-                  pro.changePlatform();
-                },
-              );
-            }),
-            Consumer<ThemeController>(builder: (context, pro, _) {
-              return Switch(
-                  value: pro.getTheme,
+            ListTile(
+              leading: Container(
+                height: 50,
+                width: 30,
+                alignment: Alignment.center,
+                child: Icon(Icons.android),
+              ),
+              title: Text(
+                "Platform",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              subtitle: Text(
+                "Change Platform",
+              ),
+              trailing:
+                  Consumer<PlatformController>(builder: (context, pro, _) {
+                return Switch(
+                  value: pro.getPlatformConverter,
                   onChanged: (val) {
-                    pro.changeTheme();
-                  });
-            }),
+                    pro.changePlatform();
+                  },
+                );
+              }),
+            ),
+            Divider(),
+            ListTile(
+              leading: Container(
+                  height: 50,
+                  width: 30,
+                  alignment: Alignment.center,
+                  child: Icon(Icons.light_mode)),
+              title: Text(
+                "Theme",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              subtitle: Text(
+                "Change Theme",
+              ),
+              trailing: Consumer<ThemeController>(builder: (context, pro, _) {
+                return Switch(
+                    value: pro.getTheme,
+                    onChanged: (val) {
+                      pro.changeTheme();
+                    });
+              }),
+            ),
           ],
         ),
       ),

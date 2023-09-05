@@ -123,11 +123,12 @@ class AllTask extends StatelessWidget {
                         itemCount: pro.allTaskList.length,
                         itemBuilder: (context, index) {
                           TaskModal tm = pro.allTaskList[index];
-                          print(tm.important);
+                          // print(tm.status);
                           return Card(
                             child: Consumer<StatusController>(
                                 builder: (context, p, _) {
                               p.StatusChanged(s: tm.status);
+                              // print("Status ${p.Status}");
                               return ListTile(
                                 onLongPress: () {
                                   editDeleteTask(
@@ -138,12 +139,27 @@ class AllTask extends StatelessWidget {
                                   height: 50,
                                   child: LikeButton(
                                     size: 45,
+                                    onTap: (isLiked) async {
+                                      (!isLiked)
+                                          ? p.StatusChanged(s: "Done")
+                                          : p.StatusChanged(s: "NotDone");
+                                      tm.status = p.Status;
+                                      try {
+                                        pro.editTask(task: tm, index: index);
+                                      } catch (e) {
+                                        print("ExceptionHandled Succesfully");
+                                      } finally {
+                                        print("Exception finally handled");
+                                      }
+
+                                      return await !isLiked;
+                                    },
                                     isLiked: (p.Status == "Done"),
                                     likeBuilder: (isLiked) {
                                       (isLiked)
                                           ? p.StatusChanged(s: "Done")
                                           : p.StatusChanged(s: "NotDone");
-                                      tm.status = p.Status;
+
                                       pro.editTask(task: tm, index: index);
                                       return Icon(
                                         (isLiked)
@@ -159,9 +175,17 @@ class AllTask extends StatelessWidget {
                                   style: TextStyle(
                                       decoration: (p.Status == "Done")
                                           ? TextDecoration.lineThrough
-                                          : null),
+                                          : null,
+                                      fontSize: 18),
                                 ),
-                                subtitle: Text("${tm.date},${tm.time}"),
+                                subtitle: Text(
+                                  "${tm.date},${tm.time}",
+                                  style: TextStyle(
+                                    decoration: (p.Status == "Done")
+                                        ? TextDecoration.lineThrough
+                                        : null,
+                                  ),
+                                ),
                                 trailing: Container(
                                   width: 50,
                                   height: 50,
@@ -172,8 +196,14 @@ class AllTask extends StatelessWidget {
                                       (isLiked)
                                           ? tm.important = "True"
                                           : tm.important = "False";
-                                      print("Action : ${tm.important}");
-                                      pro.editTask(task: tm, index: index);
+                                      // print("Action : ${tm.important}");
+                                      try {
+                                        pro.editTask(task: tm, index: index);
+                                      } catch (e) {
+                                        print("ExceptionHandled Succesfully");
+                                      } finally {
+                                        print("Exception finally handled");
+                                      }
                                       return Icon(
                                         (isLiked)
                                             ? Icons.star

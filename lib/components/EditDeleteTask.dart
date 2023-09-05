@@ -4,6 +4,7 @@ import 'package:to_do_application/modals/TaskModal.dart';
 import '../controller/DateTimeController.dart';
 import '../controller/TaskController.dart';
 import '../controller/ThemeController.dart';
+import '../utils/ColorUtils.dart';
 
 void editDeleteTask(
     {required BuildContext context,
@@ -143,7 +144,14 @@ void editDeleteTask(
             children: [
               Consumer<DateTimeController>(
                 builder: (context, p, _) {
-                  return OutlinedButton(
+                  return ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        elevation: 5,
+                        fixedSize: Size(100, 30),
+                        backgroundColor: color1,
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10))),
                     onPressed: () {
                       bool notNull = taskController.text == "" ? false : true;
                       if (notNull) {
@@ -181,7 +189,14 @@ void editDeleteTask(
                   );
                 },
               ),
-              TextButton(
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    elevation: 5,
+                    fixedSize: Size(100, 30),
+                    backgroundColor: color1,
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10))),
                 onPressed: () {
                   Provider.of<TaskController>(context, listen: false)
                       .deleteTask(index: index);
