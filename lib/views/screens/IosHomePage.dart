@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:to_do_application/components/Ios_allTaskDialog.dart';
+import 'package:to_do_application/components/Ios_addTaskDialog.dart';
 
 import '../../controller/PlatformController.dart';
 import '../../utils/MyRoutes.dart';
@@ -18,16 +18,15 @@ class IosHomePage extends StatelessWidget {
     double h = s.height;
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
-        middle: Text("HomePage"),
-        trailing: Consumer<PlatformController>(
-          builder: (context, pro, _) {
-            return CupertinoSwitch(
-              onChanged: (val) {
-                pro.changePlatform();
-              },
-              value: pro.getPlatformConverter,
-            );
+        middle: Text("To-Do App"),
+        trailing: GestureDetector(
+          onTap: () {
+            Navigator.of(context).pushNamed(MyIOSRoutes.IosSettingPage);
           },
+          child: Icon(
+            CupertinoIcons.settings,
+            size: 25,
+          ),
         ),
       ),
       child: Padding(
@@ -38,7 +37,7 @@ class IosHomePage extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () {
-                  // Navigator.of(context).pushNamed(MyRoutes.allToday);
+                  Navigator.of(context).pushNamed(MyIOSRoutes.IosAllToDay);
                 },
                 child: Container(
                   width: w,
@@ -60,7 +59,7 @@ class IosHomePage extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  // Navigator.of(context).pushNamed(MyRoutes.allImportant);
+                  Navigator.of(context).pushNamed(MyIOSRoutes.IosAllImportant);
                 },
                 child: Container(
                   width: w,

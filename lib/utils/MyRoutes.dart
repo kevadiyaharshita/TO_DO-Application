@@ -11,5 +11,8 @@ class MyIOSRoutes {
   static String home = '/';
   static String addTaskPage = 'AddTaskPage';
   static String IosAllTaskPage = 'IosAllTask';
+  static String IosAllImportant = 'IosAllImortant';
   static String SplashScreen = 'SpalshScreen';
+  static String IosSettingPage = 'IosSettinhPage';
+  static String IosAllToDay = 'IosAllToday';
 }

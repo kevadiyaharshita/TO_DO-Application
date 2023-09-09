@@ -43,10 +43,11 @@ class AndroidSettingPage extends StatelessWidget {
             Divider(),
             ListTile(
               leading: Container(
-                  height: 50,
-                  width: 30,
-                  alignment: Alignment.center,
-                  child: Icon(Icons.light_mode)),
+                height: 50,
+                width: 30,
+                alignment: Alignment.center,
+                child: Icon(Icons.light_mode),
+              ),
               title: Text(
                 "Theme",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),

@@ -55,7 +55,7 @@ class AllImportant extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
                                 children: List.generate(
-                                  4,
+                                  11,
                                   (index) => GestureDetector(
                                     onTap: () {
                                       Provider.of<BGController>(context,

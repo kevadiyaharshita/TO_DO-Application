@@ -6,11 +6,14 @@ import 'package:to_do_application/controller/SplashScreenController.dart';
 import 'package:to_do_application/controller/TaskController.dart';
 import 'package:to_do_application/utils/ColorUtils.dart';
 import 'package:to_do_application/utils/MyRoutes.dart';
-import 'package:to_do_application/views/screens/IosAddTaskPage.dart';
+// import 'package:to_do_application/views/screens/IosAddTaskPage.dart';
 import 'package:to_do_application/views/screens/IosHomePage.dart';
+import 'package:to_do_application/views/screens/IosSettingPage.dart';
 import 'package:to_do_application/views/screens/SplashScreen.dart';
 import 'package:to_do_application/views/screens/allImportant.dart';
+import 'package:to_do_application/views/screens/allIosImportantTask.dart';
 import 'package:to_do_application/views/screens/allIosTaskPage.dart';
+import 'package:to_do_application/views/screens/allIosTodayTask.dart';
 import 'package:to_do_application/views/screens/allTaskPage.dart';
 import 'package:to_do_application/views/screens/allToDay.dart';
 import 'package:to_do_application/views/screens/androidHomePage.dart';
@@ -74,7 +77,10 @@ class MyApp extends StatelessWidget {
             routes: {
               MyIOSRoutes.home: (context) => IosHomePage(),
               MyIOSRoutes.IosAllTaskPage: (context) => AllIosTaskPage(),
-              MyIOSRoutes.addTaskPage: (context) => IosAddTaskPage(),
+              // MyIOSRoutes.addTaskPage: (context) => IosAddTaskPage(),
+              MyIOSRoutes.IosAllImportant: (context) => AllImportantTask(),
+              MyIOSRoutes.IosAllToDay: (context) => AllIosTodayTask(),
+              MyIOSRoutes.IosSettingPage: (context) => IosSettingPage(),
               MyIOSRoutes.SplashScreen: (context) => SplashScreen(),
             },
           )

@@ -20,7 +20,7 @@ class HomePage extends StatelessWidget {
     double redius = 200;
     return Scaffold(
       appBar: AppBar(
-        title: Text("HomePage"),
+        title: Text("To-Do App"),
         actions: [
           IconButton(
             onPressed: () {
