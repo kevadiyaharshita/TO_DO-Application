@@ -39,7 +39,7 @@ void main() async {
           create: (context) => PlatformController(preferences: preferences),
         ),
         ChangeNotifierProvider(
-          create: (context) => SplashScreenController(preferences: preferences),
+          create: (context) => SplashScreenController(),
         ),
         ChangeNotifierProvider(
           create: (context) => DateTimeController(),
@@ -73,7 +73,7 @@ class MyApp extends StatelessWidget {
                   ? Brightness.dark
                   : Brightness.light,
             ),
-            initialRoute: MyIOSRoutes.home,
+            initialRoute:(Provider.of<SplashScreenController>(context).getSplash)? MyIOSRoutes.SplashScreen :MyIOSRoutes.home,
             routes: {
               MyIOSRoutes.home: (context) => IosHomePage(),
               MyIOSRoutes.IosAllTaskPage: (context) => AllIosTaskPage(),
@@ -105,7 +105,7 @@ class MyApp extends StatelessWidget {
             themeMode: Provider.of<ThemeController>(context).getTheme
                 ? ThemeMode.dark
                 : ThemeMode.light,
-            initialRoute: MyRoutes.home,
+            initialRoute:(Provider.of<SplashScreenController>(context).getSplash)? MyRoutes.SplashScreen : MyRoutes.home,
             routes: {
               MyRoutes.home: (context) => HomePage(),
               MyRoutes.AndroidSettingPage: (context) => AndroidSettingPage(),

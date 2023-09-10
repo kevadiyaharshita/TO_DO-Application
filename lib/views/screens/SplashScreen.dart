@@ -15,28 +15,31 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     changepage() {
       Timer.periodic(Duration(seconds: 4), (timer) {
+        Provider.of<SplashScreenController>(context, listen: false)
+            .changeSplash();
         Navigator.of(context).pushReplacementNamed(
             (Provider.of<PlatformController>(context, listen: false)
                     .getPlatformConverter)
                 ? MyIOSRoutes.home
                 : MyRoutes.home);
-        Provider.of<SplashScreenController>(context).changeSplash();
         timer.cancel();
       });
     }
 
     changepage();
-    return Consumer<ThemeController>(builder: (context, pro, _) {
-      return Scaffold(
-        body: Center(
-          child: Image(
-            image: AssetImage((pro.getTheme)
-                ? 'assets/images/dark_theme.gif'
-                : 'assets/images/Light_theme.gif'),
+    return Consumer<ThemeController>(
+      builder: (context, pro, _) {
+        return Scaffold(
+          body: Center(
+            child: Image(
+              image: AssetImage((pro.getTheme)
+                  ? 'assets/images/SplashDark.gif'
+                  : 'assets/images/SplashLight.gif'),
+            ),
           ),
-        ),
-        backgroundColor: pro.getTheme ? Color.fromRGBO(25, 24, 24, 1) : null,
-      );
-    });
+          backgroundColor: pro.getTheme ? Color.fromRGBO(25, 24, 24, 1) : null,
+        );
+      },
+    );
   }
 }
